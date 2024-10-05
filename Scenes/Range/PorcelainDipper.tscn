@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://dps2aximqew6b"]
+
+[ext_resource type="Script" path="res://Scripts/Range.gd" id="1_071op"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v2rvs"]
+size = Vector3(3.5, 0.3, 2.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_egwgx"]
+size = Vector3(2.5, 0.3, 3.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_7r1ve"]
+size = Vector3(4.5, 0.3, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gfy51"]
+size = Vector3(0.5, 0.3, 4.5)
+
+[node name="PorcelainDipper" type="Area3D"]
+script = ExtResource("1_071op")
+
+[node name="C2" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_v2rvs")
+
+[node name="C" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_egwgx")
+
+[node name="Range" type="Node" parent="."]
+metadata/Name = "PorcelainDipper"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_7r1ve")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_gfy51")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

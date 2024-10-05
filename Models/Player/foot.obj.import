@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://0bg7n6sctgkl"
+path="res://.godot/imported/foot.obj-e408104a0b2c2cb89a1a8bb2d91be4d0.mesh"
+
+[deps]
+
+files=["res://.godot/imported/foot.obj-e408104a0b2c2cb89a1a8bb2d91be4d0.mesh"]
+
+source_file="res://Models/Player/foot.obj"
+dest_files=["res://.godot/imported/foot.obj-e408104a0b2c2cb89a1a8bb2d91be4d0.mesh", "res://.godot/imported/foot.obj-e408104a0b2c2cb89a1a8bb2d91be4d0.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

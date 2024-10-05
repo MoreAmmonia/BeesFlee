@@ -1,0 +1,151 @@
+[gd_scene load_steps=15 format=3 uid="uid://durni0rageul2"]
+
+[ext_resource type="Script" path="res://Scripts/RobloxModel.gd" id="1_xc7rg"]
+[ext_resource type="ArrayMesh" uid="uid://lvd80dflxrj8" path="res://Models/Player/armup.obj" id="1_xd35t"]
+[ext_resource type="ArrayMesh" uid="uid://d3seiulrol5vh" path="res://Models/Player/armdown.obj" id="2_yntge"]
+[ext_resource type="ArrayMesh" uid="uid://bc5c2ugeqgks8" path="res://Models/Player/hand.obj" id="3_c0bvg"]
+[ext_resource type="ArrayMesh" uid="uid://d2f08d6gvlh4r" path="res://Models/Player/body.obj" id="4_ev2k8"]
+[ext_resource type="ArrayMesh" uid="uid://bntkmmptflsgd" path="res://Models/Player/head.obj" id="5_k5e7h"]
+[ext_resource type="ArrayMesh" uid="uid://cfxjvojkb2yfj" path="res://Models/Player/handle.obj" id="6_5w2ig"]
+[ext_resource type="ArrayMesh" uid="uid://b3eo0nmnji5qb" path="res://Models/Player/legup.obj" id="7_ylj7i"]
+[ext_resource type="ArrayMesh" uid="uid://c7ppy3bey8ajf" path="res://Models/Player/legdown.obj" id="8_m8fcr"]
+[ext_resource type="ArrayMesh" uid="uid://0bg7n6sctgkl" path="res://Models/Player/foot.obj" id="9_q7by3"]
+[ext_resource type="ArrayMesh" uid="uid://ddop5ktj68yus" path="res://Models/Player/waist.obj" id="10_tvp2o"]
+
+[sub_resource type="Animation" id="Animation_s8evd"]
+resource_name = "RobloxGather"
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RAM")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0.707107, 0, 0, 0.707107, 0.5, 1, 0, 0, 0, 1, 1, 1, 0.707107, 0, 0, 0.707107)
+
+[sub_resource type="Animation" id="Animation_vkc7r"]
+resource_name = "RobloxMove"
+loop_mode = 1
+step = 0.05
+tracks/0/type = "rotation_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ArmLeft")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.25, 1, 0.258819, 0, 0, 0.965926, 0.5, 1, 0, 0, 0, 1, 0.75, 1, -0.258819, 0, 0, 0.965926, 1, 1, 0, 0, 0, 1)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LegLeft")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.25, 1, -0.258819, 0, 0, 0.965926, 0.5, 1, 0, 0, 0, 1, 0.75, 1, 0.258819, 0, 0, 0.965926, 1, 1, 0, 0, 0, 1)
+tracks/2/type = "rotation_3d"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("LegRight")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.25, 1, 0.258819, 0, 0, 0.965926, 0.5, 1, 0, 0, 0, 1, 0.75, 1, -0.258819, 0, 0, 0.965926, 1, 1, 0, 0, 0, 1)
+tracks/3/type = "rotation_3d"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Waist")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.25, 1, 0, -0.0871557, 0, 0.996195, 0.5, 1, 0, 0, 0, 1, 0.75, 1, 0, 0.0871557, 0, 0.996195, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2clsh"]
+_data = {
+"RobloxGather": SubResource("Animation_s8evd"),
+"RobloxMove": SubResource("Animation_vkc7r")
+}
+
+[node name="RobloxModel" type="Node3D"]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+script = ExtResource("1_xc7rg")
+
+[node name="ArmRight" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.42758, 0.160937, 0)
+mesh = ExtResource("1_xd35t")
+
+[node name="Armdown" type="MeshInstance3D" parent="ArmRight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.571848, 0)
+mesh = ExtResource("2_yntge")
+skeleton = NodePath("../..")
+
+[node name="Hand" type="MeshInstance3D" parent="ArmRight/Armdown"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.675056, 0.014909)
+mesh = ExtResource("3_c0bvg")
+skeleton = NodePath("../../..")
+
+[node name="Body" type="MeshInstance3D" parent="."]
+mesh = ExtResource("4_ev2k8")
+
+[node name="Head" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.19432, 0)
+mesh = ExtResource("5_k5e7h")
+skeleton = NodePath("../..")
+
+[node name="Handle" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.488451, 0.124718, -0.494032)
+mesh = ExtResource("6_5w2ig")
+
+[node name="LegRight" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.440423, -1.9, 0)
+mesh = ExtResource("7_ylj7i")
+
+[node name="Legdown" type="MeshInstance3D" parent="LegRight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.536356, -0.0137978)
+mesh = ExtResource("8_m8fcr")
+skeleton = NodePath("../..")
+
+[node name="Foot" type="MeshInstance3D" parent="LegRight/Legdown"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.772673, 0.0482922)
+mesh = ExtResource("9_q7by3")
+skeleton = NodePath("../../..")
+
+[node name="Waist" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.977129, 0)
+mesh = ExtResource("10_tvp2o")
+
+[node name="ArmLeft" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.57242, 0.160937, 0)
+mesh = ExtResource("1_xd35t")
+
+[node name="Armdown" type="MeshInstance3D" parent="ArmLeft"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.49012e-08, 0, -1.49012e-08, 1, 0, -0.571848, 1.86265e-09)
+mesh = ExtResource("2_yntge")
+skeleton = NodePath("../..")
+
+[node name="Hand" type="MeshInstance3D" parent="ArmLeft/Armdown"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.675056, 0.014909)
+mesh = ExtResource("3_c0bvg")
+skeleton = NodePath("../../..")
+
+[node name="LegLeft" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.559577, -1.9, 0)
+mesh = ExtResource("7_ylj7i")
+
+[node name="Legdown" type="MeshInstance3D" parent="LegLeft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.536356, -0.0137978)
+mesh = ExtResource("8_m8fcr")
+skeleton = NodePath("../..")
+
+[node name="Foot" type="MeshInstance3D" parent="LegLeft/Legdown"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.772673, 0.0482922)
+mesh = ExtResource("9_q7by3")
+skeleton = NodePath("../../..")
+
+[node name="AnimGather" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2clsh")
+}
+
+[node name="AnimMove" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_2clsh")
+}
+
+[node name="RAM" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)

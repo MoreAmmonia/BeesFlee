@@ -1,0 +1,457 @@
+[gd_scene load_steps=31 format=3 uid="uid://cgrhofmuirx6n"]
+
+[ext_resource type="Script" path="res://Scripts/InGameGUI.gd" id="1_0xd0o"]
+[ext_resource type="Theme" uid="uid://caahj210bti31" path="res://GUI.tres" id="2_mdcl7"]
+[ext_resource type="Script" path="res://Scripts/Resume.gd" id="3_o12ee"]
+[ext_resource type="Script" path="res://Scripts/Button.gd" id="3_p70ek"]
+[ext_resource type="Script" path="res://Scripts/ResetButton.gd" id="5_pah5y"]
+[ext_resource type="Theme" uid="uid://bb3yi1lg10t6n" path="res://Textures/UI/SideBar.tres" id="6_21qxw"]
+[ext_resource type="Texture2D" uid="uid://dx51p3mhl2pa1" path="res://Textures/UI/Item.png" id="6_xb2u4"]
+[ext_resource type="ButtonGroup" uid="uid://dkm1ds821sfxe" path="res://SideBarButtonGroup.tres" id="7_w00t1"]
+[ext_resource type="Texture2D" uid="uid://5ssjdkq4xhtc" path="res://Textures/UI/Quest.png" id="9_kxyqg"]
+[ext_resource type="Texture2D" uid="uid://po564b8o3ui4" path="res://Textures/UI/Bees.png" id="10_x5niv"]
+[ext_resource type="Texture2D" uid="uid://by7sji44mpda5" path="res://Textures/UI/Badge.png" id="11_6k5ic"]
+[ext_resource type="Texture2D" uid="uid://dm25gehmtxfv7" path="res://Textures/UI/Settings.png" id="12_homor"]
+[ext_resource type="Texture2D" uid="uid://c3jhocalw5hrw" path="res://Textures/UI/Shop.png" id="13_jkekm"]
+[ext_resource type="PackedScene" uid="uid://qwd05dvq2pva" path="res://Scenes/JoyStick.tscn" id="14_nsfod"]
+[ext_resource type="PackedScene" uid="uid://bce2e0lpu8x70" path="res://Scenes/Sidebar/ListItem.tscn" id="15_cdftf"]
+[ext_resource type="Texture2D" uid="uid://dxyyrbpm0wvng" path="res://Textures/Item/GuidingStar.png" id="16_0kgs3"]
+[ext_resource type="Texture2D" uid="uid://dg4yer2qvwkkq" path="res://Textures/Item/SuperSmoothie.png" id="17_k0uh0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t5ojj"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p4kj0"]
+border_color = Color(1, 1, 1, 0)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6vn41"]
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q5s3w"]
+bg_color = Color(1, 0, 0, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_avmel"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b1s8h"]
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q4l37"]
+bg_color = Color(0.364706, 0.364706, 0.364706, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w0sal"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_q7a6c"]
+bg_color = Color(0.6, 0.6, 0.6, 0.403922)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jstna"]
+bg_color = Color(0, 0, 0, 0.576471)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1pghe"]
+bg_color = Color(0, 0, 0, 0.576471)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tpad6"]
+bg_color = Color(0, 0, 0, 0.576471)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cf3cc"]
+
+[node name="InGameGUI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0xd0o")
+uiscale = 2.0
+
+[node name="PollenHoney" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+pivot_offset = Vector2(302, 0)
+
+[node name="HoneyBar" type="Control" parent="PollenHoney"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Background" type="Panel" parent="PollenHoney/HoneyBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_t5ojj")
+
+[node name="MarginContainer" type="MarginContainer" parent="PollenHoney/HoneyBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PollenHoney/HoneyBar/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PollenHoney/HoneyBar/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "Honey"
+
+[node name="MarginContainer" type="MarginContainer" parent="PollenHoney/HoneyBar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Text" type="Control" parent="PollenHoney/HoneyBar/MarginContainer/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(195, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Panel" type="Panel" parent="PollenHoney/HoneyBar/MarginContainer/HBoxContainer/MarginContainer/Text"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_p4kj0")
+
+[node name="Data" type="Label" parent="PollenHoney/HoneyBar/MarginContainer/HBoxContainer/MarginContainer/Text"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "114"
+horizontal_alignment = 3
+vertical_alignment = 1
+
+[node name="PollenBar" type="Control" parent="PollenHoney"]
+custom_minimum_size = Vector2(300, 50)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Background" type="Panel" parent="PollenHoney/PollenBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_t5ojj")
+
+[node name="MarginContainer" type="MarginContainer" parent="PollenHoney/PollenBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PollenHoney/PollenBar/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PollenHoney/PollenBar/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 28
+text = "Pollen"
+
+[node name="MarginContainer" type="MarginContainer" parent="PollenHoney/PollenBar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Text" type="Control" parent="PollenHoney/PollenBar/MarginContainer/HBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(195, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Panel" type="Panel" parent="PollenHoney/PollenBar/MarginContainer/HBoxContainer/MarginContainer/Text"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_p4kj0")
+
+[node name="ProgressBar" type="ProgressBar" parent="PollenHoney/PollenBar/MarginContainer/HBoxContainer/MarginContainer/Text"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_6vn41")
+theme_override_styles/fill = SubResource("StyleBoxFlat_q5s3w")
+value = 49.42
+allow_greater = true
+show_percentage = false
+
+[node name="Data" type="Label" parent="PollenHoney/PollenBar/MarginContainer/HBoxContainer/MarginContainer/Text"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "114"
+horizontal_alignment = 3
+vertical_alignment = 1
+
+[node name="Buff" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+
+[node name="MenuButton" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="MenuButton"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_avmel")
+theme_override_styles/hover = SubResource("StyleBoxFlat_b1s8h")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_q4l37")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_w0sal")
+text = "||"
+script = ExtResource("3_p70ek")
+
+[node name="SideBar" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 0
+offset_top = 100.0
+offset_right = 40.0
+offset_bottom = 140.0
+theme = ExtResource("6_21qxw")
+
+[node name="ItemButton" type="Button" parent="SideBar"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("7_w00t1")
+icon = ExtResource("6_xb2u4")
+expand_icon = true
+
+[node name="QuestButton" type="Button" parent="SideBar"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("7_w00t1")
+icon = ExtResource("9_kxyqg")
+expand_icon = true
+
+[node name="BeesButton" type="Button" parent="SideBar"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("7_w00t1")
+icon = ExtResource("10_x5niv")
+expand_icon = true
+
+[node name="BadgeButton" type="Button" parent="SideBar"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("7_w00t1")
+icon = ExtResource("11_6k5ic")
+expand_icon = true
+
+[node name="SettingsButton" type="Button" parent="SideBar"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("7_w00t1")
+icon = ExtResource("12_homor")
+expand_icon = true
+
+[node name="ShopButton" type="Button" parent="SideBar"]
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("7_w00t1")
+icon = ExtResource("13_jkekm")
+expand_icon = true
+
+[node name="JoyStick" parent="." instance=ExtResource("14_nsfod")]
+scale = Vector2(0.25, 0.25)
+
+[node name="Debug" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -55.0
+offset_bottom = 26.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 40
+text = "DEBUG"
+horizontal_alignment = 2
+
+[node name="ScrollLists" type="Control" parent="."]
+custom_minimum_size = Vector2(404, 0)
+anchors_preset = 0
+offset_top = 164.0
+offset_right = 404.0
+offset_bottom = 464.0
+
+[node name="ItemList" type="ScrollContainer" parent="ScrollLists"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_q7a6c")
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ScrollLists/ItemList"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+
+[node name="ListItem" parent="ScrollLists/ItemList/VBoxContainer" instance=ExtResource("15_cdftf")]
+layout_mode = 2
+
+[node name="ListItem2" parent="ScrollLists/ItemList/VBoxContainer" instance=ExtResource("15_cdftf")]
+layout_mode = 2
+
+[node name="ListItem3" parent="ScrollLists/ItemList/VBoxContainer" instance=ExtResource("15_cdftf")]
+layout_mode = 2
+
+[node name="Menu" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="Button" parent="Menu"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_jstna")
+theme_override_styles/hover = SubResource("StyleBoxFlat_1pghe")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tpad6")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_cf3cc")
+script = ExtResource("3_o12ee")
+
+[node name="Menu" type="VBoxContainer" parent="Menu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -175.5
+offset_top = -47.0
+offset_right = 175.5
+offset_bottom = 47.0001
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(175, 47)
+theme = ExtResource("2_mdcl7")
+theme_override_constants/separation = 10
+
+[node name="ResumeButton" type="Button" parent="Menu/Menu"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Resume"
+script = ExtResource("3_o12ee")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Menu/Menu"]
+layout_mode = 2
+
+[node name="ResetButton" type="Button" parent="Menu/Menu/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Reset Character"
+script = ExtResource("5_pah5y")
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="Menu/Menu/HBoxContainer/ResetButton"]
+title = "Reset"
+initial_position = 4
+size = Vector2i(200, 109)
+dialog_text = "Do you really want to reset your characters?"
+dialog_autowrap = true
+
+[node name="LeaveButton" type="Button" parent="Menu/Menu/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Leave Server"
+
+[node name="Cursor2" type="Sprite2D" parent="."]
+texture = ExtResource("16_0kgs3")
+
+[node name="Cursor" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource("17_k0uh0")
+expand_mode = 1
+
+[connection signal="pressed" from="SideBar/ItemButton" to="." method="refresh"]
+[connection signal="mouse_entered" from="ScrollLists/ItemList" to="." method="mouse_entered"]
+[connection signal="mouse_exited" from="ScrollLists/ItemList" to="." method="mouse_exited"]
+[connection signal="confirmed" from="Menu/Menu/HBoxContainer/ResetButton/ConfirmationDialog" to="." method="_on_confirmation_dialog_confirmed"]

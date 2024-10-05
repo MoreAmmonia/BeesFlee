@@ -1,0 +1,27 @@
+{
+	"2":{
+		"icon":"BubbleFloat",
+		"name":"Gumdrops",
+		"intro":"Use while standing in a field to cover flowers in goo. Goo grants bonus honey.",
+	},
+	"1":{
+		"icon":"GuidingStar",
+		"name":"Shit",
+		"intro":"As you see,\nSome shit.",
+	},
+	"3":{
+		"icon":"SuperSmoothie",
+		"name":"Super Smoothie",
+		"intro":"Grants the improved boosts of many consumable items combined for 20 minutes!",
+	},
+	"4":{
+		"icon":"GuidingStar",
+		"name":"4",
+		"intro":"As you see,\nSome shit.",
+	},
+	"5":{
+		"icon":"GuidingStar",
+		"name":"5",
+		"intro":"As you see,\nSome shit.",
+	},
+}

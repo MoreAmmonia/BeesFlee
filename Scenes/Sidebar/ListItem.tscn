@@ -1,0 +1,109 @@
+[gd_scene load_steps=7 format=3 uid="uid://bce2e0lpu8x70"]
+
+[ext_resource type="Script" path="res://Scripts/ListItem.gd" id="1_ed7pl"]
+[ext_resource type="Texture2D" uid="uid://dxyyrbpm0wvng" path="res://Textures/Item/GuidingStar.png" id="2_cog0a"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5us8v"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ccy64"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ym0vd"]
+bg_color = Color(0.956863, 0.968627, 0.964706, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b5svp"]
+bg_color = Color(0.917647, 0.933333, 0.929412, 1)
+
+[node name="ListItem" type="Control"]
+custom_minimum_size = Vector2(400, 100)
+layout_mode = 3
+anchors_preset = 0
+mouse_filter = 1
+script = ExtResource("1_ed7pl")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Background" type="ColorRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+mouse_filter = 1
+color = Color(0.831373, 0.866667, 0.854902, 1)
+
+[node name="Button" type="Button" parent="HBoxContainer/Background"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+theme_override_styles/normal = SubResource("StyleBoxEmpty_5us8v")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5us8v")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_5us8v")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_5us8v")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ccy64")
+icon = ExtResource("2_cog0a")
+icon_alignment = 1
+expand_icon = true
+
+[node name="Amount" type="Label" parent="HBoxContainer/Background/Button"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -31.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 20
+text = "x22"
+horizontal_alignment = 2
+vertical_alignment = 2
+clip_text = true
+
+[node name="Content" type="VBoxContainer" parent="HBoxContainer"]
+custom_minimum_size = Vector2(280, 0)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Title" type="Label" parent="HBoxContainer/Content"]
+custom_minimum_size = Vector2(0, 35)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 23
+theme_override_styles/normal = SubResource("StyleBoxFlat_ym0vd")
+text = "Magic Guaiding Sida"
+horizontal_alignment = 1
+vertical_alignment = 1
+clip_text = true
+
+[node name="Introduction" type="Label" parent="HBoxContainer/Content"]
+custom_minimum_size = Vector2(0, 65)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -2
+theme_override_styles/normal = SubResource("StyleBoxFlat_b5svp")
+text = "Test word word comfortable haha so cool heaaallo ah hahaha hahaha hahahaha hahahaha ha"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+clip_text = true
+
+[connection signal="button_down" from="HBoxContainer/Background/Button" to="." method="hold"]
+[connection signal="pressed" from="HBoxContainer/Background/Button" to="." method="pressed"]

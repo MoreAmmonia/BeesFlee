@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://lvd80dflxrj8"
+path="res://.godot/imported/armup.obj-26b7d85b7e71a5cad25dbe2ec4f9b555.mesh"
+
+[deps]
+
+files=["res://.godot/imported/armup.obj-26b7d85b7e71a5cad25dbe2ec4f9b555.mesh"]
+
+source_file="res://Models/Player/armup.obj"
+dest_files=["res://.godot/imported/armup.obj-26b7d85b7e71a5cad25dbe2ec4f9b555.mesh", "res://.godot/imported/armup.obj-26b7d85b7e71a5cad25dbe2ec4f9b555.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

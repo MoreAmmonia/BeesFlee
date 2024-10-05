@@ -1,0 +1,864 @@
+[gd_scene load_steps=11 format=3 uid="uid://bsd0ofvppbo0y"]
+
+[ext_resource type="PackedScene" uid="uid://b1rlprcbxu3hg" path="res://Scenes/Player.tscn" id="1_b68ih"]
+[ext_resource type="Texture2D" uid="uid://c7q5wiw6qghaj" path="res://Textures/Handle1_diff.png" id="1_jpksa"]
+[ext_resource type="Script" path="res://Scripts/PlayerData.gd" id="2_atcai"]
+[ext_resource type="ArrayMesh" uid="uid://csjfg7eoh7yxq" path="res://Models/PorcelainDipper.obj" id="3_1k83f"]
+[ext_resource type="PackedScene" uid="uid://cgrhofmuirx6n" path="res://Scenes/InGameGUI.tscn" id="3_fwqdb"]
+[ext_resource type="PackedScene" uid="uid://1j4y0fx4scyn" path="res://Scenes/Flower.tscn" id="5_l5367"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_d65en"]
+sky_top_color = Color(0.219608, 0.458824, 0.705882, 1)
+sky_horizon_color = Color(0.604902, 0.656956, 0.709721, 1)
+ground_horizon_color = Color(0.604902, 0.656956, 0.709721, 1)
+
+[sub_resource type="Sky" id="Sky_ljy1p"]
+sky_material = SubResource("ProceduralSkyMaterial_d65en")
+
+[sub_resource type="Environment" id="Environment_2e1iq"]
+background_mode = 2
+sky = SubResource("Sky_ljy1p")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o8w7q"]
+albedo_texture = ExtResource("1_jpksa")
+point_size = 117.3
+
+[node name="World" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0158939, 3.8147e-06, -0.21917)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2e1iq")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Map" type="Node3D" parent="."]
+
+[node name="Ground" type="CSGBox3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+material_override = SubResource("StandardMaterial3D_o8w7q")
+use_collision = true
+size = Vector3(100, 1, 100)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.29797, 0.5, 0)
+use_collision = true
+
+[node name="Player" parent="." instance=ExtResource("1_b68ih")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.85662, 0.765911, -0.868246)
+
+[node name="ToolHandle" type="Node3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.42927, 1.06402, 0.0505062)
+
+[node name="Point" type="Node3D" parent="Player/ToolHandle"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, -0.339227, -0.00402176)
+
+[node name="PorcelainDipper" type="MeshInstance3D" parent="Player/ToolHandle/Point"]
+mesh = ExtResource("3_1k83f")
+skeleton = NodePath("../../../..")
+
+[node name="PlayerData" type="Node3D" parent="."]
+unique_name_in_owner = true
+visible = false
+script = ExtResource("2_atcai")
+debug = true
+capacity = 100000
+
+[node name="InGameGUI" parent="." instance=ExtResource("3_fwqdb")]
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[node name="Field" type="Node3D" parent="."]
+
+[node name="Node3D" type="Node3D" parent="Field"]
+
+[node name="Node3D4" type="Node3D" parent="Field/Node3D"]
+
+[node name="Node3D" type="Node3D" parent="Field/Node3D/Node3D4"]
+
+[node name="Flower" parent="Field/Node3D/Node3D4/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D/Node3D4/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D/Node3D4/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D/Node3D4/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D2" type="Node3D" parent="Field/Node3D/Node3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="Flower" parent="Field/Node3D/Node3D4/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D/Node3D4/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D/Node3D4/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D/Node3D4/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D3" type="Node3D" parent="Field/Node3D/Node3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="Flower" parent="Field/Node3D/Node3D4/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D/Node3D4/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D/Node3D4/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D/Node3D4/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D5" type="Node3D" parent="Field/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="Node3D" type="Node3D" parent="Field/Node3D/Node3D5"]
+
+[node name="Flower" parent="Field/Node3D/Node3D5/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D/Node3D5/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D/Node3D5/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D/Node3D5/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D2" type="Node3D" parent="Field/Node3D/Node3D5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="Flower" parent="Field/Node3D/Node3D5/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D/Node3D5/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D/Node3D5/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D/Node3D5/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D3" type="Node3D" parent="Field/Node3D/Node3D5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="Flower" parent="Field/Node3D/Node3D5/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D/Node3D5/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D/Node3D5/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D/Node3D5/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D6" type="Node3D" parent="Field/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2.98023e-08)
+
+[node name="Node3D" type="Node3D" parent="Field/Node3D/Node3D6"]
+
+[node name="Flower" parent="Field/Node3D/Node3D6/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D/Node3D6/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D/Node3D6/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D/Node3D6/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D2" type="Node3D" parent="Field/Node3D/Node3D6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="Flower" parent="Field/Node3D/Node3D6/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D/Node3D6/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D/Node3D6/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D/Node3D6/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D3" type="Node3D" parent="Field/Node3D/Node3D6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="Flower" parent="Field/Node3D/Node3D6/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D/Node3D6/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D/Node3D6/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D/Node3D6/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D2" type="Node3D" parent="Field"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+
+[node name="Node3D4" type="Node3D" parent="Field/Node3D2"]
+
+[node name="Node3D" type="Node3D" parent="Field/Node3D2/Node3D4"]
+
+[node name="Flower" parent="Field/Node3D2/Node3D4/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D2/Node3D4/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D2/Node3D4/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D2/Node3D4/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D2" type="Node3D" parent="Field/Node3D2/Node3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="Flower" parent="Field/Node3D2/Node3D4/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D2/Node3D4/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D2/Node3D4/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D2/Node3D4/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D3" type="Node3D" parent="Field/Node3D2/Node3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="Flower" parent="Field/Node3D2/Node3D4/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D2/Node3D4/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D2/Node3D4/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D2/Node3D4/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D5" type="Node3D" parent="Field/Node3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="Node3D" type="Node3D" parent="Field/Node3D2/Node3D5"]
+
+[node name="Flower" parent="Field/Node3D2/Node3D5/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D2/Node3D5/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D2/Node3D5/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D2/Node3D5/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D2" type="Node3D" parent="Field/Node3D2/Node3D5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="Flower" parent="Field/Node3D2/Node3D5/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D2/Node3D5/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D2/Node3D5/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D2/Node3D5/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D3" type="Node3D" parent="Field/Node3D2/Node3D5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="Flower" parent="Field/Node3D2/Node3D5/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D2/Node3D5/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D2/Node3D5/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D2/Node3D5/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D6" type="Node3D" parent="Field/Node3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2.98023e-08)
+
+[node name="Node3D" type="Node3D" parent="Field/Node3D2/Node3D6"]
+
+[node name="Flower" parent="Field/Node3D2/Node3D6/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D2/Node3D6/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D2/Node3D6/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D2/Node3D6/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D2" type="Node3D" parent="Field/Node3D2/Node3D6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="Flower" parent="Field/Node3D2/Node3D6/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D2/Node3D6/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D2/Node3D6/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D2/Node3D6/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D3" type="Node3D" parent="Field/Node3D2/Node3D6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="Flower" parent="Field/Node3D2/Node3D6/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D2/Node3D6/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D2/Node3D6/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D2/Node3D6/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D3" type="Node3D" parent="Field"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+
+[node name="Node3D4" type="Node3D" parent="Field/Node3D3"]
+
+[node name="Node3D" type="Node3D" parent="Field/Node3D3/Node3D4"]
+
+[node name="Flower" parent="Field/Node3D3/Node3D4/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D3/Node3D4/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D3/Node3D4/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D3/Node3D4/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D2" type="Node3D" parent="Field/Node3D3/Node3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="Flower" parent="Field/Node3D3/Node3D4/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D3/Node3D4/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D3/Node3D4/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D3/Node3D4/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D3" type="Node3D" parent="Field/Node3D3/Node3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="Flower" parent="Field/Node3D3/Node3D4/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D3/Node3D4/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D3/Node3D4/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D3/Node3D4/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D5" type="Node3D" parent="Field/Node3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="Node3D" type="Node3D" parent="Field/Node3D3/Node3D5"]
+
+[node name="Flower" parent="Field/Node3D3/Node3D5/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D3/Node3D5/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D3/Node3D5/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D3/Node3D5/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D2" type="Node3D" parent="Field/Node3D3/Node3D5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="Flower" parent="Field/Node3D3/Node3D5/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D3/Node3D5/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D3/Node3D5/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D3/Node3D5/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D3" type="Node3D" parent="Field/Node3D3/Node3D5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="Flower" parent="Field/Node3D3/Node3D5/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D3/Node3D5/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D3/Node3D5/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D3/Node3D5/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D6" type="Node3D" parent="Field/Node3D3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2.98023e-08)
+
+[node name="Node3D" type="Node3D" parent="Field/Node3D3/Node3D6"]
+
+[node name="Flower" parent="Field/Node3D3/Node3D6/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D3/Node3D6/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D3/Node3D6/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D3/Node3D6/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D2" type="Node3D" parent="Field/Node3D3/Node3D6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="Flower" parent="Field/Node3D3/Node3D6/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D3/Node3D6/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D3/Node3D6/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D3/Node3D6/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D3" type="Node3D" parent="Field/Node3D3/Node3D6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="Flower" parent="Field/Node3D3/Node3D6/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D3/Node3D6/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D3/Node3D6/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D3/Node3D6/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D4" type="Node3D" parent="Field"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 3)
+
+[node name="Node3D4" type="Node3D" parent="Field/Node3D4"]
+
+[node name="Node3D" type="Node3D" parent="Field/Node3D4/Node3D4"]
+
+[node name="Flower" parent="Field/Node3D4/Node3D4/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D4/Node3D4/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D4/Node3D4/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D4/Node3D4/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D2" type="Node3D" parent="Field/Node3D4/Node3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="Flower" parent="Field/Node3D4/Node3D4/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D4/Node3D4/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D4/Node3D4/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D4/Node3D4/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D3" type="Node3D" parent="Field/Node3D4/Node3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="Flower" parent="Field/Node3D4/Node3D4/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D4/Node3D4/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D4/Node3D4/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D4/Node3D4/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D5" type="Node3D" parent="Field/Node3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="Node3D" type="Node3D" parent="Field/Node3D4/Node3D5"]
+
+[node name="Flower" parent="Field/Node3D4/Node3D5/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D4/Node3D5/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D4/Node3D5/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D4/Node3D5/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D2" type="Node3D" parent="Field/Node3D4/Node3D5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="Flower" parent="Field/Node3D4/Node3D5/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D4/Node3D5/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D4/Node3D5/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D4/Node3D5/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D3" type="Node3D" parent="Field/Node3D4/Node3D5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="Flower" parent="Field/Node3D4/Node3D5/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D4/Node3D5/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D4/Node3D5/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D4/Node3D5/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D6" type="Node3D" parent="Field/Node3D4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 2.98023e-08)
+
+[node name="Node3D" type="Node3D" parent="Field/Node3D4/Node3D6"]
+
+[node name="Flower" parent="Field/Node3D4/Node3D6/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D4/Node3D6/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D4/Node3D6/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D4/Node3D6/Node3D" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D2" type="Node3D" parent="Field/Node3D4/Node3D6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+
+[node name="Flower" parent="Field/Node3D4/Node3D6/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D4/Node3D6/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D4/Node3D6/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D4/Node3D6/Node3D2" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[node name="Node3D3" type="Node3D" parent="Field/Node3D4/Node3D6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -2)
+
+[node name="Flower" parent="Field/Node3D4/Node3D6/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 5.00775)
+
+[node name="Flower2" parent="Field/Node3D4/Node3D6/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 3
+
+[node name="Flower3" parent="Field/Node3D4/Node3D6/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 5.00775)
+flowercolor = 1
+flowersize = 5
+
+[node name="Flower4" parent="Field/Node3D4/Node3D6/Node3D3" instance=ExtResource("5_l5367")]
+transform = Transform3D(1.00155, 0, 0, 0, 1.00155, 0, 0, 0, 1.00155, 0.500775, 0.1, 4.50698)
+flowercolor = 1
+flowersize = 2
+
+[connection signal="timeout" from="Timer" to="PlayerData" method="_on_timer_timeout"]
